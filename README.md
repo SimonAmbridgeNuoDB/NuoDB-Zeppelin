@@ -4,9 +4,22 @@ How to run analytic queries and data visualisation using Zeppelin Notebooks with
 
  This demo will use the following technologies:
 
-- NuoDB distributed SQL relation database
+- NuoDB distributed SQL relational database
 - Spark
 - Scala
 - Python
 - NuoSQL
 - Zeppelin
+
+## Pre-requisites
+
+## Installation
+
+### Apache Zeppelin
+
+### Python driver
+
+### NuoSQL interpreter
+
+
+## Set Up User Security with Apache Shiro
