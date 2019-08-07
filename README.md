@@ -102,6 +102,7 @@ Install the NuoDB Python driver:
 ```
 
 <BR>
+
 ## Creating a NuoDB Zeppelin Notebook With Python
 
 In Zeppelin, Click Notebook -> Create New Note
@@ -129,10 +130,11 @@ import pynuodb
 <BR>
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings. 
+
 <BR>
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
-Add a new paragraph below the one you used to import the NuoDB Python library. Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
+Add a paragraph below the one you used to import the NuoDB Python library. Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
 
 Paste in the block of code below.
 
@@ -195,6 +197,10 @@ Took 1 sec. Last updated by anonymous at August 06 2019, 6:11:47 PM.
 ## Creating a NuoDB Zeppelin Notebook With SparkSQL
 
 ### Add the NuoDB JDBC driver to the Spark shell artefact list.
+
+Click the drop down next to anonymous in the top right corner of the page and select Intepreters.
+
+Scroll down to the Spark definition. Click the edit button on the right hand side and add the artefact describing the location of the NuoDB JDBC driver that was downloaded previously.
 
 
 
