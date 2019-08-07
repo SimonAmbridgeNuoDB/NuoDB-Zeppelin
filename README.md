@@ -31,7 +31,6 @@ Download the NuoDB JDBC driver - you can download the latest NuoDB JDBC driver f
 
 Place the JDBC driver in a location where it can be accessed by Zeppelin.
 
-<BR>
 
 ### Install Apache Zeppelin
 
@@ -39,11 +38,11 @@ On the machine where Zeppelin will run, download the Binary package with all int
 
 There is also a Docker image available, or the option to build from source.
 
+* Install guide: https://zeppelin.apache.org/docs/0.8.1/quickstart/install.html
+
+* Documentation: http://zeppelin.apache.org/docs/0.8.1/index.html
+
 In this example I'll deploy the Zeppelin binaries from the tarball distribution.
-
-Install guide: https://zeppelin.apache.org/docs/0.8.1/quickstart/install.html
-
-Documentation: http://zeppelin.apache.org/docs/0.8.1/index.html
 
 Download the Zeppelin archive to a working directory.
 
@@ -152,29 +151,32 @@ import pynuodb
 
 <BR>
 <B>NB</B> 
-You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings. 
-
+You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings.
 
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
+
+This Python code sample will connect to the database, drop the test table if it already exists, then create the test table, insert some records and finally query them back.
 
 Add a paragraph below the one you used to import the NuoDB Python library
 * Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
 
 Paste in the block of code below.
 
-Edit the database connection details to match your environment and credentials - database name, host address or name, username and password, and schema name.
-
-This Python code sample will connect to the database, drop the test table if it already exists, then create the test table, insert some records and finally query them back.
-
-To demonstrate how a notebook works, we'll break the code into sections to demonstrate how individual instructions or sets of instructions can be modified and re-run.
-
-So, create a new paragraph and paste in the following code and click run: 
-
 ```
 options = {"schema": "user"}
 connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
 ```
+
+Edit the database connection details to match your environment and credentials - database name, host address or name, username and password, and schema name.
+
+To demonstrate how a notebook works, we'll break the code into sections to show how individual instructions or sets of instructions can be modified and re-run.
+
+So, create a new paragraph and paste in the following code and click run: 
+
 ![Image description](python-notebook-2.png)
+
+
+
 
 
 ```
