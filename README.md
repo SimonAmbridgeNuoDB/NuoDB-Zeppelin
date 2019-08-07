@@ -123,17 +123,20 @@ In the notebook, go to the first blank paragraph and type:
 import pynuodb
 ```
 
+Your screen should look like this:
+
 ![Image description](python-notebook-1.png)
 
-
+<BR>
 Then click the play icon on the right hand side of the paragraph to run the instruction.
 
-![Image description](notebook-buttons.png)
+![Image description](zeppelin-buttons.png)
 
-
+<BR>
 When the instruction completes (very quickly) you will get a message below it, like this:
+```
 
-```Took 3 sec. Last updated by anonymous at August 06 2019, 5:46:03 PM.```
+Took 3 sec. Last updated by anonymous at August 06 2019, 5:46:03 PM.```
 
 <BR>
 <B>NB</B> If you had selected Spark as your default interpreter you would have to invoke the Python interpreter in each cell like this:
