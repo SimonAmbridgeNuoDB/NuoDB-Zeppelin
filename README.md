@@ -32,7 +32,8 @@ Download the NuoDB JDBC driver - you can download the latest NuoDB JDBC driver f
 Place the JDBC driver in a location where it can be accessed by Zeppelin.
 
 <BR>
-### Apache Zeppelin
+
+### Install Apache Zeppelin
 
 On the machine where Zeppelin will run, download the Binary package with all interpreters at https://zeppelin.apache.org/download.html
 
@@ -68,16 +69,16 @@ $ bin/zeppelin-daemon.sh start
 Zeppelin start                                             [  OK  ]
 ```
 
-Go to the Zeppelin server at http://<your-zeppelin-host>:8080
+Go to the Zeppelin server at http://[your-zeppelin-host]:8080
 
-Where <your-zeppelin-host> is the name or the address of the machine where Zeppelin is running.
+Where [your-zeppelin-host] is the name or the address of the machine where Zeppelin is running.
 
 At this point you will see the main Zeppelin page, where you can run the Zeppelin tutorials, import new notebooks, link to the documentation, etc.
 
 ![Image description](zeppelin-start-page.png)
 
 <BR>
-To stop Zeppelin use the stop option:
+To stop Zeppelin you can use the stop option:
 
 ```
 $ bin/zeppelin-daemon.sh stop
@@ -85,7 +86,7 @@ Zeppelin stopped                                           [  OK  ]
 ```
 <BR>
 
-### Python driver
+### Install The NuoDB Python driver
 
 On the machine where Zeppelin is running, download the NuoDB Python driver:
 
@@ -110,15 +111,17 @@ Install the NuoDB Python driver:
 
 ## Create a Zeppelin Notebook to run Python against a NuoDB database
 
-In Zeppelin, Click Notebook -> Create New Note
+The first notebook example will use Python to query the NuoDB database.
+
+From the Zeppelin main page, on the menu bar click Notebook -> Create New Note
 * Give your notebook a meaningful name, and select your default interpreter.
 * The default interpreter is Spark, but in this case we will be using Python, so change the drop down selection accordingly.
 
 ![Image description](new-notebook-python.png)
 
-* Click Create.
+Click Create.
 
-In the notebook, go to the first blank paragraph and type:
+In the notebook itself, go to the first blank paragraph and type:
 ```
 import pynuodb
 ```
@@ -134,12 +137,13 @@ Then click the play icon on the right hand side of the paragraph to run the inst
 
 <BR>
 When the instruction completes (very quickly) you will get a message below it, like this:
+
+```
+Took 3 sec. Last updated by anonymous at August 06 2019, 5:46:03 PM.
 ```
 
-Took 3 sec. Last updated by anonymous at August 06 2019, 5:46:03 PM.```
-
 <BR>
-<B>NB</B> If you had selected Spark as your default interpreter you would have to invoke the Python interpreter in each cell like this:
+<B>NB</B> If you had selected Spark as your default interpreter you would have had to invoke the Python interpreter in each cell like this to over-ride the default:
 
 ```
 %python
@@ -160,7 +164,17 @@ Paste in the block of code below.
 
 Edit the database connection details to match your environment and credentials - database name, host address or name, username and password, and schema name.
 
-This block of Python code will connect to the database, drop the test table if it already exists, then creates the test table, inserts some records and finally queries them back.
+This Python code sample will connect to the database, drop the test table if it already exists, then create the test table, insert some records and finally query them back.
+
+To demonstrate how a notebook works, we'll break the code into sections to demonstrate how individual instructions or sets of instructions can be modified and re-run.
+
+So, create a new paragraph and paste in the following code and click run: 
+
+```
+options = {"schema": "user"}
+connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
+```
+![Image description](python-notebook-2.png)
 
 
 ```
