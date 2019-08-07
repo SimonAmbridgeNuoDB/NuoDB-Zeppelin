@@ -20,7 +20,7 @@ This project will demonstrate how to run analytic queries and data visualisation
 	* You can download the NuoDB binaries for various platforms here - https://www.nuodb.com/dev-center/community-edition-download
 	
 * A machine on which to install Zeppelin.
-	* This could be one of the TE's or a separate machine or even a laptop. 
+	* This could be one of the NuoDB Transaction Engines (TE's), or a separate machine/cloud instance, or even a laptop. 
 	* Ideally the Zeppelin server should be in close proximity to the data source in order to reduce latency.
 
 ## Installation
@@ -68,16 +68,16 @@ $ bin/zeppelin-daemon.sh start
 Zeppelin start                                             [  OK  ]
 ```
 
-Go to the Zeppelin server at http://<your-Zeppelin-host>:8080
+Go to the Zeppelin server at http://<your-zeppelin-host>:8080
 
-Where <your-Zeppelin-host> is the name or the address of the machine where Zeppelin is running.
+Where <your-zeppelin-host> is the name or the address of the machine where Zeppelin is running.
 
 At this point you will see the main Zeppelin page, where you can run the Zeppelin tutorials, import new notebooks, link to the documentation, etc.
 
 ![Image description](zeppelin-start-page.png)
-[[https://github.com/langworth/NuoDB-Zeppelin/blob/master/img/zeppelin-start-page.png|alt=zeppelin-start-page]]
 
-To stop Zeppelin 
+<BR>
+To stop Zeppelin use the stop option:
 
 ```
 $ bin/zeppelin-daemon.sh stop
@@ -112,14 +112,25 @@ Install the NuoDB Python driver:
 
 In Zeppelin, Click Notebook -> Create New Note
 * Give your notebook a meaningful name, and select your default interpreter.
-* The default interpreter is Spark, but in this case we will be using Python so change the drop down selection accordingly.
+* The default interpreter is Spark, but in this case we will be using Python, so change the drop down selection accordingly.
+
+![Image description](new-notebook-python.png)
+
 * Click Create.
 
-In the notebook, go to the blank paragraph and type:
+In the notebook, go to the first blank paragraph and type:
 ```
 import pynuodb
 ```
+
+![Image description](python-notebook-1.png)
+
+
 Then click the play icon on the right hand side of the paragraph to run the instruction.
+
+![Image description](notebook-buttons.png)
+
+
 When the instruction completes (very quickly) you will get a message below it, like this:
 
 ```Took 3 sec. Last updated by anonymous at August 06 2019, 5:46:03 PM.```
@@ -139,7 +150,8 @@ You can change the default interpreter in a running notebook - use the cog symbo
 
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
-Add a paragraph below the one you used to import the NuoDB Python library. Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
+Add a paragraph below the one you used to import the NuoDB Python library
+* Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
 
 Paste in the block of code below.
 
@@ -242,6 +254,7 @@ Allen York 2011 2011 CBS 1 11
 We now have a working sample Python notebook that can access data in NuoDB.
 
 <BR>
+
 ## Create a Zeppelin Notebook to run SparkSQL, Scala and Java instructions against a NuoDB database
 
 This example will use SparkSQL and some light Scala to query the NuoDB database.
@@ -372,9 +385,7 @@ root
 How many records? Run this:
 ```
 player1.count()
-```
-The answer is displayed:
-```
+
 res48: Long = 7520
 ```
 
@@ -398,6 +409,7 @@ only showing top 5 rows
 
 
 <BR>
+
 ## Create a  Zeppelin Notebook to run SQL instructions against a NuoDB database
 
 
