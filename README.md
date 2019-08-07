@@ -53,6 +53,8 @@ zeppelin-0.8.1-bin-all.tgz
 
 Uncompress the archive and go into the extracted Zeppelin directory
 ```
+$ tar xvf zeppelin-0.8.1-bin-all.tgz
+
 $ cd zeppelin-0.8.1-bin-all
 
 $ ls
@@ -71,6 +73,9 @@ Go to the Zeppelin server at http://<your-Zeppelin-host>:8080
 Where <your-Zeppelin-host> is the name or the address of the machine where Zeppelin is running.
 
 At this point you will see the main Zeppelin page, where you can run the Zeppelin tutorials, import new notebooks, link to the documentation, etc.
+
+![Image description](zeppelin-start-page.png)
+[[https://github.com/langworth/NuoDB-Zeppelin/blob/master/img/zeppelin-start-page.png|alt=zeppelin-start-page]]
 
 To stop Zeppelin 
 
@@ -103,7 +108,7 @@ Install the NuoDB Python driver:
 
 <BR>
 
-## Creating a NuoDB Zeppelin Notebook With Python
+## Create a Zeppelin Notebook to run Python against a NuoDB database
 
 In Zeppelin, Click Notebook -> Create New Note
 * Give your notebook a meaningful name, and select your default interpreter.
@@ -142,9 +147,6 @@ Edit the database connection details to match your environment and credentials -
 
 This block of Python code will connect to the database, drop the test table if it already exists, then creates the test table, inserts some records and finally queries them back.
 
-
-<BR>
-<BR>
 
 ```
 options = {"schema": "user"}
@@ -192,30 +194,78 @@ Results:
 Took 1 sec. Last updated by anonymous at August 06 2019, 6:11:47 PM.
 ```
 
+Now let's look at an example that return data from the sample Hockey database.
+```
+options = {"schema": "user"}
+connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
 
+connection = pynuodb.connect(**connect_kw_args)
+cursor = connection.cursor()
+
+try:
+
+    querystr = "SELECT p.firstname,p.lastname,p.firstnhl,p.lastnhl,s.teamid,s.stint,gamesplayed FROM players p LEFT OUTER JOIN scoring s ON p.playerid = s.playerid AND p.firstnhl = s.year AND s.position = 'G' WHERE p.firstnhl = 2011 AND s.gamesplayed IS NOT NULL ORDER BY LASTNAME,FIRSTNAME,TEAMID"
+    cursor.execute(querystr)
+
+    for row in cursor.fetchall():
+        print row[0], row[1],row[2],row[3],row[4],row[5],row[6]
+
+finally:
+    cursor.close()
+    connection.close()
+
+
+print
+d.disconnect()
+```
+When you click the play/run icon you'll see the following data returned from NuoDB:
+
+```
+Brian Foster 2011 2011 FLO 1 1
+Matt Hackett 2011 2011 MIN 1 12
+Shawn Hunwick 2011 2011 CBS 1 1
+Leland Irving 2011 2011 CAL 1 7
+Mike Murphy 2011 2011 CAR 1 2
+Anders Nilsson 2011 2011 NYI 1 4
+Jussi Rynnas 2011 2011 TOR 1 2
+Ben Scrivens 2011 2011 TOR 1 12
+Iiro Tarkki 2011 2011 AND 1 1
+Brad Thiessen 2011 2011 PIT 1 5
+Allen York 2011 2011 CBS 1 11
+
+```
+
+We now have a working sample Python notebook that can access data in NuoDB.
 
 <BR>
-## Creating a NuoDB Zeppelin Notebook With SparkSQL
+## Create a Zeppelin Notebook to run SparkSQL, Scala and Java instructions against a NuoDB database
 
-### Add the NuoDB JDBC driver to the Spark shell artefact list.
+This example will use SparkSQL and some light Scala to query the NuoDB database.
+
+First we need to point the Spark interpreter to our NuoDB JDBC driver.
+
+### Add the NuoDB JDBC driver to the Spark Shell artifact list.
 
 Click the drop down next to anonymous in the top right corner of the page and select Intepreters.
 
-Scroll down to the Spark definition. Click the edit button on the right hand side and add the artefact describing the location of the NuoDB JDBC driver that was downloaded previously.
+Scroll down to the Spark definition. 
 
+Click the edit button on the right hand side of the Spark interpreter section. Scroll down the Spark definition and add the artifact describing the location of the NuoDB JDBC driver that you downloaded previously onto the server where Zeppelin is running.
 
+For example
 
 ```
 Dependencies
 artifact
 /home/ec2-user/nuodb-jdbc-20.0.0.jar
 ```
+![Image description](pic.png)
 
 ### Create The Spark Notebook
 
-Create a new blank workbook as above, but this time leave the default interpreter set to Spark.
+Create a new blank workbook as as you did for Python, but this time leave the default interpreter set to Spark.
 
-In the empty cell, past the following library imports:
+In the new empty cell, past the following library imports and run the cell:
 
 ```
 import org.apache.commons.io.IOUtils
@@ -288,12 +338,77 @@ val player1 = spark.read
 
 ```
 
+You now have a dataframe called player1 containing the data from the players table in NuoDB.
+
+In a new cell run the following command to print the dataframe schema:
+
+```
+player1.printSchema()
+```
+
+Your output will look like this:
+```
+root
+ |-- PLAYERID: string (nullable = false)
+ |-- FIRSTNAME: string (nullable = true)
+ |-- LASTNAME: string (nullable = true)
+ |-- HEIGHT: integer (nullable = true)
+ |-- WEIGHT: integer (nullable = true)
+ |-- FIRSTNHL: integer (nullable = false)
+ |-- LASTNHL: integer (nullable = false)
+ |-- POSITION: string (nullable = true)
+ |-- BIRTHYEAR: integer (nullable = true)
+ |-- BIRTHMON: integer (nullable = true)
+ |-- BIRTHDAY: integer (nullable = true)
+ |-- BIRTHCOUNTRY: string (nullable = true)
+ |-- BIRTHSTATE: string (nullable = true)
+ |-- BIRTHCITY: string (nullable = true)
+```
+
+How many records? Run this:
+```
+player1.count()
+```
+The answer is displayed:
+```
+res48: Long = 7520
+```
+
+Finally, to actually view the data:
+```
+player1.show(5)
+```
+The output will be:
+```
++---------+---------+----------+------+------+--------+-------+--------+---------+--------+--------+------------+----------+------------+
+| PLAYERID|FIRSTNAME|  LASTNAME|HEIGHT|WEIGHT|FIRSTNHL|LASTNHL|POSITION|BIRTHYEAR|BIRTHMON|BIRTHDAY|BIRTHCOUNTRY|BIRTHSTATE|   BIRTHCITY|
++---------+---------+----------+------+------+--------+-------+--------+---------+--------+--------+------------+----------+------------+
+|aaltoan01|    Antti|     Aalto|    73|   210|    1997|   2000|       C|     1975|       3|       4|     Finland|         0|Lappeenranta|
+|abbeybr01|    Bruce|     Abbey|    73|   185|       0|      0|       D|     1951|       8|      18|      Canada|        ON|     Toronto|
+|abbotge01|   George|    Abbott|    67|   153|    1943|   1943|       G|     1911|       8|       3|      Canada|        ON|    Synenham|
+|abbotre01|      Reg|    Abbott|    71|   164|    1952|   1952|       C|     1930|       2|       4|      Canada|        MB|    Winnipeg|
+|abdelju01|   Justin|Abdelkader|    73|   195|    2007|   2011|       L|     1987|       2|      25|         USA|        MI|    Muskegon|
++---------+---------+----------+------+------+--------+-------+--------+---------+--------+--------+------------+----------+------------+
+only showing top 5 rows
+```
+
 
 <BR>
-## Creating a NuoDB Zeppelin Notebook With NuoDB
-### Create The NuoSQL Tnterpreter
+## Create a  Zeppelin Notebook to run SQL instructions against a NuoDB database
+
+
+This notebook will use a custom NuoSQL interpreter to allow SQL commands to be run interactively against a NuoDB database.
+
+There is no default NuoDB interpreter provided, but we can easily create one.
+
+
+### Create The NuoSQL Interpreter
 
 Create the interpreter config
+
+![Image description](nuodb-interpreter-config.png)
+
+
 
 
 
