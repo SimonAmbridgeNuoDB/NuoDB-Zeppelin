@@ -131,6 +131,7 @@ import pynuodb
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings. 
 
+
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
 Add a paragraph below the one you used to import the NuoDB Python library. Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
@@ -144,6 +145,7 @@ This block of Python code will connect to the database, drop the test table if i
 
 <BR>
 <BR>
+
 ```
 options = {"schema": "user"}
 connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
