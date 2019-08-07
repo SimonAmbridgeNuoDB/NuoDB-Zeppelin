@@ -185,7 +185,9 @@ finally:
     connection.close()
 ```
 <BR>
+
 After pasting in the code above, click the play/run icon. Your output will look like this:
+
 ```
 Results:
 1 | Greg
@@ -195,6 +197,7 @@ Took 1 sec. Last updated by anonymous at August 06 2019, 6:11:47 PM.
 ```
 
 Now let's look at an example that return data from the sample Hockey database.
+
 ```
 options = {"schema": "user"}
 connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
@@ -218,6 +221,7 @@ finally:
 print
 d.disconnect()
 ```
+
 When you click the play/run icon you'll see the following data returned from NuoDB:
 
 ```
