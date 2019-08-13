@@ -521,7 +521,7 @@ $ cp conf/shiro.ini.template conf/shiro.ini
 $ vi conf/shiro.conf
 ```
 
-Default users:
+The default users and passwords, role assignments:
 ```
 admin = password1, admin
 user1 = password2, role1, role2
@@ -529,7 +529,7 @@ user2 = password3, role3
 user3 = password4, role2
 ```
 
-Default roles:
+The default roles:
 ```
 [roles]
 role1 = *
@@ -539,7 +539,7 @@ admin = *
 ```
 
 
-Turn on auth security:
+Turn on auth security at the bottom of the file:
 ```
 #/** = anon
 /** = authc
@@ -552,6 +552,7 @@ $ cp zeppelin-site.xml.template zeppelin-site.xml
 $ vi zeppelin-site.xml
 ```
 
+Turn off anonymous logins - set true to false:
 ```
 <property>
   <name>zeppelin.anonymous.allowed</name>
@@ -569,7 +570,6 @@ Zeppelin start                                             [  OK  ]
 ```
 
 Reload the main page at http:[your-server]:8080
-
 
 You'll notice a new login button in the top right corner:
 
