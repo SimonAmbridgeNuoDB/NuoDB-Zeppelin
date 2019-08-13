@@ -511,7 +511,7 @@ When you connect to Apache Zeppelin, you will be asked to enter your credentials
 ### Creating Roles & Users in Apache Shiro
 
 
-Configure the shiro.ini file:
+Set up basic authentication in the shiro.ini file:
 
 ```
 $ cp conf/shiro.ini.template conf/shiro.ini
