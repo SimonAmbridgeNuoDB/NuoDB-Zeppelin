@@ -108,7 +108,7 @@ Install the NuoDB Python driver:
 
 <BR>
 
-## Create a Zeppelin Notebook to run Python against a NuoDB database
+## Run Python code against a NuoDB database using a Zeppelin notebook
 
 The first notebook example will use Python to query the NuoDB database.
 
@@ -171,20 +171,29 @@ Edit the database connection details to match your environment and credentials -
 
 To demonstrate how a notebook works, we'll break the code into sections to show how individual instructions or sets of instructions can be modified and re-run.
 
-So, create a new paragraph and paste in the following code and click run: 
+So, create a new paragraph and paste in the following code to set up some Python variables and click run: 
 
 ![Image description](python-notebook-2.png)
 
+No output, but the command completed successfully.
+
+<B>Tip</B> you can examine the status of notebook cells by clicking the Job option on the top menu and identifying your workbook. 
 
 
-
+Now we'll create a couple of connection objects:
 
 ```
-options = {"schema": "user"}
-connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
-
 connection = pynuodb.connect(**connect_kw_args)
 cursor = connection.cursor()
+```
+
+Like this:
+
+![Image description](python-notebook-3.png)
+
+Finally, to prove it all works, run the main part of the program:
+
+```
 try:
     stmt_drop = "DROP TABLE IF EXISTS names"
     cursor.execute(stmt_drop)
@@ -274,19 +283,19 @@ We now have a working sample Python notebook that can access data in NuoDB.
 
 <BR>
 
-## Create a Zeppelin Notebook to run SparkSQL, Scala and Java instructions against a NuoDB database
+## Run SparkSQL, Scala and Java instructions against a NuoDB database in a Zeppelin notebook
 
 This example will use SparkSQL and some light Scala to query the NuoDB database.
 
 First we need to point the Spark interpreter to our NuoDB JDBC driver.
 
-### Add the NuoDB JDBC driver to the Spark Shell artifact list.
+### Add the NuoDB JDBC driver to the Spark Shell artefact list.
 
 Click the drop down next to anonymous in the top right corner of the page and select Intepreters.
 
 Scroll down to the Spark definition. 
 
-Click the edit button on the right hand side of the Spark interpreter section. Scroll down the Spark definition and add the artifact describing the location of the NuoDB JDBC driver that you downloaded previously onto the server where Zeppelin is running.
+Click the edit button on the right hand side of the Spark interpreter section. Scroll down the Spark definition and add the artefact describing the location of the NuoDB JDBC driver that you downloaded previously onto the server where Zeppelin is running.
 
 For example
 
@@ -429,22 +438,56 @@ only showing top 5 rows
 
 <BR>
 
-## Create a  Zeppelin Notebook to run SQL instructions against a NuoDB database
+## Run SQL instructions against a NuoDB database in a Zeppelin notebook
 
 
-This notebook will use a custom NuoSQL interpreter to allow SQL commands to be run interactively against a NuoDB database.
+This exercise will create and use a custom NuoSQL interpreter to allow SQL commands to be run interactively against a NuoDB database using a Zeppelin notebook.
 
 There is no default NuoDB interpreter provided, but we can easily create one.
 
 
 ### Create The NuoSQL Interpreter
 
-Create the interpreter config
+Click the drop down option next to Anonymous in the top right corner.
+
+Select the Interpreter option.
+
+Click the Create button.
+
+Give the new interpreter a name, e.g. NuoSQL
+
+Select jdbc from the list of options under Interpreter Group
+
+A list of properties and values for the JDBC connection will be displayed. 
+
+Change the following:
+
+```
+default.user		<your-user>
+default.password	<your-password>
+default.driver		com.nuodb.jdbc.Driver
+default.url			jdbc:com.nuodb://<your-server:48004/<your-db>
+```
+
+At the bottom of the definition under Dependencies add the JDBC driver e.g.
+
+```
+Dependencies
+artifact
+/home/ec2-user/nuodb-jdbc-20.0.0.jar
+```
 
 ![Image description](nuodb-interpreter-config.png)
 
+Click Save.
 
+Now reate a new blank workbook as you did previously, but this time select NuoSQL as the default interpreter.
 
+In the new empty cell, past the following and run the cell:
+
+select * from system.connections
+
+![Image description](python-zeppelin-1.png)
 
 
 <BR>
