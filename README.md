@@ -513,22 +513,30 @@ When you connect to Apache Zeppelin, you will be asked to enter your credentials
 
 Configure users in conf file.
 
+```
 $ cp conf/shiro.ini.template conf/shiro.ini
+```
 
+```
 $ vi conf/shiro.conf
+```
 
 Default users:
+```
 admin = password1, admin
 user1 = password2, role1, role2
 user2 = password3, role3
 user3 = password4, role2
+```
 
 Default roles:
+```
 [roles]
 role1 = *
 role2 = *
 role3 = *
 admin = *
+```
 
 
 Turn on auth security:
@@ -550,15 +558,27 @@ $ vi zeppelin-site.xml
 </property>
 ```
 
-restart
+Restart the Zeppelin daemon:
 
-back to main page at 8080
+```
+$ bin/zeppelin-daemon.sh restart
+Zeppelin stop                                              [  OK  ]
+Zeppelin start                                             [  OK  ]
+```
 
-login button top right
+
+Reload the main page at http:[your-server]:8080
+
+
+You'll notice a new login button in the top right corner:
 
 ![Image description](zeppelin-login-1.png)
 
+Click Login and enter the credentials defined above in shiro.ini, e.g. admin/password1
 
+![Image description](zeppelin-login-2.png)
+
+That's it - you now have basic security enabled. You can now play around with roles and permissions on notebooks.
 <BR>
 
 ### Setting Privileges in  Zeppelin Notebooks
