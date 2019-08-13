@@ -487,7 +487,7 @@ In the new empty cell, past the following and run the cell:
 
 select * from system.connections
 
-![Image description](python-zeppelin-1.png)
+![Image description](nuosql-notebook-1.png)
 
 
 <BR>
