@@ -304,7 +304,7 @@ Dependencies
 artifact
 /home/ec2-user/nuodb-jdbc-20.0.0.jar
 ```
-![Image description](pic.png)
+<BR>
 
 ### Create The Spark Notebook
 
@@ -498,21 +498,66 @@ We have data queried from NuoDB:
 
 ## Set Up User Security with Apache Shiro
 
-By default, all users log in as anonymous.
+By default, all users log into Zeppelin as anonymous, which is fine if you're developing on your own machine. But if you want to share with others, it's nice to have some control over who has access and what permissions they have.
 
-<BR>
+Apache Shiro is a powerful and easy-to-use Java security framework that performs authentication, authorisation, cryptography, and session management. 
 
-### Install Apache Shiro
-We'll use Apache Shiro to enforce...
+Read more here: https://zeppelin.apache.org/docs/0.6.2/security/shiroauthentication.html
 
-Download and install Shiro
 
+When you connect to Apache Zeppelin, you will be asked to enter your credentials. Once you logged in, then you have access to all notes including other user's notes.
 <BR>
 
 ### Creating Roles & Users in Apache Shiro
 
 
-Configure users in conf file
+Configure users in conf file.
+
+$ cp conf/shiro.ini.template conf/shiro.ini
+
+$ vi conf/shiro.conf
+
+Default users:
+admin = password1, admin
+user1 = password2, role1, role2
+user2 = password3, role3
+user3 = password4, role2
+
+Default roles:
+[roles]
+role1 = *
+role2 = *
+role3 = *
+admin = *
+
+
+Turn on auth security:
+```
+#/** = anon
+/** = authc
+```
+
+```
+$ cp zeppelin-site.xml.template zeppelin-site.xml
+$ vi zeppelin-site.xml
+```
+
+```
+<property>
+  <name>zeppelin.anonymous.allowed</name>
+  <value>false</value>
+  <description>Anonymous user allowed by default</description>
+</property>
+```
+
+restart
+
+back to main page at 8080
+
+login button top right
+
+![Image description](zeppelin-login-1.png)
+
 
 <BR>
 
