@@ -505,13 +505,13 @@ Apache Shiro is a powerful and easy-to-use Java security framework that performs
 Read more here: https://zeppelin.apache.org/docs/0.6.2/security/shiroauthentication.html
 
 
-When you connect to Apache Zeppelin, you will be asked to enter your credentials. Once you logged in, then you have access to all notes including other user's notes.
+When you connect to Apache Zeppelin, you will be asked to enter your credentials. Once you're logged in you have access to all notes including other user's notes.
 <BR>
 
 ### Creating Roles & Users in Apache Shiro
 
 
-Configure users in conf file.
+Configure the shiro.ini file:
 
 ```
 $ cp conf/shiro.ini.template conf/shiro.ini
@@ -545,6 +545,8 @@ Turn on auth security:
 /** = authc
 ```
 
+Configure the zeppelin-site.xml file:
+
 ```
 $ cp zeppelin-site.xml.template zeppelin-site.xml
 $ vi zeppelin-site.xml
@@ -566,7 +568,6 @@ Zeppelin stop                                              [  OK  ]
 Zeppelin start                                             [  OK  ]
 ```
 
-
 Reload the main page at http:[your-server]:8080
 
 
@@ -579,12 +580,8 @@ Click Login and enter the credentials defined above in shiro.ini, e.g. admin/pas
 ![Image description](zeppelin-login-2.png)
 
 That's it - you now have basic security enabled. You can now play around with roles and permissions on notebooks.
+
 <BR>
-
-### Setting Privileges in  Zeppelin Notebooks
-set permissions in notebooks
-
-
 
 
 
