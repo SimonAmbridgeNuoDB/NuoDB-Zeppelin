@@ -103,7 +103,7 @@ Install the NuoDB Python driver:
 ```
 [Ec2-user_host-1 ~]$ cd nuodb-python*
 
-[Ec2-user_host-1 nuodb-python-master]$ sudo python setup.py install
+[Ec2-user_host-1 ~]$ nuodb-python-master]$ sudo python setup.py install
 ```
 
 <BR>
@@ -466,7 +466,7 @@ Change the following:
 default.user		<your-user>
 default.password	<your-password>
 default.driver		com.nuodb.jdbc.Driver
-default.url			jdbc:com.nuodb://<your-server:48004/<your-db>
+default.url		jdbc:com.nuodb://<your-server:48004/<your-db>
 ```
 
 At the bottom of the definition under Dependencies add the JDBC driver e.g.
@@ -485,29 +485,37 @@ Now reate a new blank workbook as you did previously, but this time select NuoSQ
 
 In the new empty cell, past the following and run the cell:
 
+```
 select * from system.connections
+```
+
+We have data queried from NuoDB:
 
 ![Image description](nuosql-notebook-1.png)
 
-
 <BR>
+<BR>
+
 ## Set Up User Security with Apache Shiro
 
 By default, all users log in as anonymous.
 
 <BR>
+
 ### Install Apache Shiro
 We'll use Apache Shiro to enforce...
 
 Download and install Shiro
 
 <BR>
+
 ### Creating Roles & Users in Apache Shiro
 
 
 Configure users in conf file
 
 <BR>
+
 ### Setting Privileges in  Zeppelin Notebooks
 set permissions in notebooks
 
