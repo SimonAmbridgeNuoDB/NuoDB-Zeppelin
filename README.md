@@ -1,8 +1,14 @@
 # NuoDB Analytics Using Zeppelin Notebooks, SparkSQL, Python and NuoSQL
 
-This project will demonstrate how to run analytic queries and data visualisation using Zeppelin Notebooks with SparkSQL, Python and NuoSQL.
+Apache Zeppelin is a completely open web-based notebook that enables interactive data analytics, data ingestion, data exploration, visualisation, sharing and collaboration.
 
- This demo will use the following technologies:
+![Image description](zeppelin-chart-example.png)
+
+This project will demonstrate how to run analytic queries and data visualisation against NuoDB using Zeppelin Notebooks with SparkSQL, Python and NuoSQL.
+
+![Image description](nuosql-notebook-2.png)
+
+This demo will use the following technologies:
 
 - NuoDB distributed SQL relational database
 - Spark
