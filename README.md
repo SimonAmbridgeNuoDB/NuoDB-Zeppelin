@@ -159,6 +159,7 @@ import pynuodb
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings.
 
+<BR>
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
 This Python code sample will connect to the database, drop the test table if it already exists, then create the test table, insert some records and finally query them back.
@@ -166,34 +167,34 @@ This Python code sample will connect to the database, drop the test table if it 
 Add a paragraph below the one you used to import the NuoDB Python library
 * Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
 
-Paste in the block of code below.
+Paste in the block of code below and edit according to your connection details.
 
 ```
 options = {"schema": "user"}
 connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
 ```
 
-Edit the database connection details to match your environment and credentials - database name, host address or name, username and password, and schema name.
+Change the database connection details to match your environment and credentials - database name, host address or name, username and password, and schema name.
 
-To demonstrate how a notebook works, we'll break the code into sections to show how individual instructions or sets of instructions can be modified and re-run.
+To demonstrate how a notebook works, we'll break the remainder of the code into sections to show how individual instructions, or sets of instructions, can be modified and re-run.
 
-So, create a new paragraph and paste in the following code to set up some Python variables and click run: 
+You should now have a new paragraph similar to the following example, so now click run: 
 
 ![Image description](python-notebook-2.png)
 
-No output, but the command completed successfully.
+There will be no output, but the command will completed without error.
 
-<B>Tip</B> you can examine the status of notebook cells by clicking the Job option on the top menu and identifying your workbook. 
+<B>Tip</B> you can examine the success/failure status of individual notebook cells by clicking the Job option on the top menu and identifying your notebook. 
 
 
-Now we'll create a couple of connection objects:
+Next we'll create a couple of connection objects:
 
 ```
 connection = pynuodb.connect(**connect_kw_args)
 cursor = connection.cursor()
 ```
 
-Like this:
+Click run and your output should look like this:
 
 ![Image description](python-notebook-3.png)
 
@@ -244,6 +245,7 @@ Took 1 sec. Last updated by anonymous at August 06 2019, 6:11:47 PM.
 
 Now let's look at an example that return data from the sample Hockey database.
 
+This code block starts with the same connection configuration that must be edited to reflect your environment. 
 ```
 options = {"schema": "user"}
 connect_kw_args = {'database': "your-db", 'host': "your-server", 'user': "dba", 'password': "dba", 'options': options}
@@ -268,7 +270,7 @@ print
 d.disconnect()
 ```
 
-When you click the play/run icon you'll see the following data returned from NuoDB:
+When you click the play/run icon you'll see the following sample data from the Hockey schema returned from NuoDB:
 
 ```
 Brian Foster 2011 2011 FLO 1 1
@@ -285,7 +287,7 @@ Allen York 2011 2011 CBS 1 11
 
 ```
 
-We now have a working sample Python notebook that can access data in NuoDB.
+We now have a working sample Python notebook that can access data in NuoDB!
 
 <BR>
 
@@ -378,7 +380,8 @@ connProperties: java.util.Properties = {user=dba, password=dba, schema=user}
 res45: Object = null
 ```
 
-Now that you have a working connection, you can query the database. In the next cell we create a dataframe containing data from the Hockey sample schema. Click run.
+Now that you have a working connection, you can query the database. In the next cell we create a dataframe containing data from the Hockey sample schema. 
+Click run.
 
 ```
 val player1 = spark.read
@@ -416,7 +419,7 @@ root
  |-- BIRTHCITY: string (nullable = true)
 ```
 
-How many records? Run this:
+How many records? Use this:
 ```
 player1.count()
 
@@ -447,7 +450,7 @@ only showing top 5 rows
 ## Run SQL instructions against a NuoDB database in a Zeppelin notebook
 
 
-This exercise will create and use a custom NuoSQL interpreter to allow SQL commands to be run interactively against a NuoDB database using a Zeppelin notebook.
+The final exercise will create and use a custom NuoSQL interpreter to allow SQL commands to be run interactively against a NuoDB database using a Zeppelin notebook.
 
 There is no default NuoDB interpreter provided, but we can easily create one.
 
@@ -487,7 +490,9 @@ artifact
 
 Click Save.
 
-Now reate a new blank workbook as you did previously, but this time select NuoSQL as the default interpreter.
+### Create The NuoSQL Workbook ###
+
+Now create a new blank workbook as you did previously, but this time select NuoSQL as the default interpreter.
 
 In the new empty cell, past the following and run the cell:
 
@@ -495,7 +500,7 @@ In the new empty cell, past the following and run the cell:
 select * from system.connections
 ```
 
-We have data queried from NuoDB:
+We can see the data queried from NuoDB using SQL:
 
 ![Image description](nuosql-notebook-1.png)
 
@@ -544,12 +549,15 @@ role3 = *
 admin = *
 ```
 
+### Turn On authc Security ###
 
 Turn on auth security at the bottom of the file:
 ```
 #/** = anon
 /** = authc
 ```
+
+### Configure Zeppelin for Apache Shiro ###
 
 Configure the zeppelin-site.xml file:
 
@@ -566,6 +574,8 @@ Turn off anonymous logins - set true to false:
   <description>Anonymous user allowed by default</description>
 </property>
 ```
+
+### Restart The Zeppelin Daemon & Test ###
 
 Restart the Zeppelin daemon:
 
