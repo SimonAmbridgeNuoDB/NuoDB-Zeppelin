@@ -165,7 +165,9 @@ Now let's demonstrate how to connect to NuoDB using Python code running inside t
 This Python code sample will connect to the database, drop the test table if it already exists, then create the test table, insert some records and finally query them back.
 
 Add a paragraph below the one you used to import the NuoDB Python library
-* Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph.
+* Create a new paragraph by hovering the mouse over the lower edge of the existing paragraph like this:
+![Image description](zeppelin-new-para.png)
+
 
 Paste in the block of code below and edit according to your connection details.
 
