@@ -164,7 +164,8 @@ import pynuodb
 <BR>
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings.
-<BR>
+![Image description](zeppelin-cog.png)
+
 <BR>
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
@@ -306,6 +307,8 @@ First we need to point the Spark interpreter to our NuoDB JDBC driver.
 ### Add the NuoDB JDBC driver to the Spark Shell artifact list.
 
 Click the drop down next to anonymous in the top right corner of the page and select Intepreters.
+
+![Image description](zeppelin-menu.png)
 
 Scroll down to the Spark definition. 
 
