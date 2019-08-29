@@ -164,6 +164,7 @@ import pynuodb
 <BR>
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings.
+
 ![Image description](zeppelin-cog.png)
 
 <BR>
