@@ -33,7 +33,7 @@ This demo will use the following technologies:
 	* Ideally the Zeppelin server should be in close proximity to the data source in order to reduce latency.
 
 <BR>
-NB This exercise was completed in a Linux environment. NuoDB is also supported on Windows but only for development purposes.
+NB This exercise was completed in a Linux environment. NuoDB is also supported on Windows, but only for development purposes.
 
 ## Installation
 
@@ -89,7 +89,7 @@ At this point you will see the main Zeppelin page, where you can run the Zeppeli
 ![Image description](zeppelin-start-page.png)
 
 <BR>
-To stop Zeppelin you can use the stop option:
+If you want to stop Zeppelin you can use the stop option:
 
 ```
 $ bin/zeppelin-daemon.sh stop
