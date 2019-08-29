@@ -164,7 +164,7 @@ import pynuodb
 <BR>
 <B>NB</B> 
 You can change the default interpreter in a running notebook - use the cog symbol at the top right of the notebook to modify the notebook interpreter bindings.
-
+<BR>
 <BR>
 Now let's demonstrate how to connect to NuoDB using Python code running inside the notebook.
 
