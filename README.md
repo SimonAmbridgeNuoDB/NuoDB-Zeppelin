@@ -74,9 +74,9 @@ LICENSE			bin			lib			logs			spark-warehouse
 NOTICE			conf			licenses		notebook		zeppelin-web-0.8.1.war
 README.md		interpreter		local-repo		run
 ```
-Start the Zeppelin daemon:
+Use sudo to start the Zeppelin daemon:
 ```
-$ bin/zeppelin-daemon.sh start
+$ sudo bin/zeppelin-daemon.sh start
 Zeppelin start                                             [  OK  ]
 ```
 
